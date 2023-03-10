@@ -1,6 +1,6 @@
 import { LocalDining } from '@mui/icons-material';
 import { Box,  Container, Grid, ImageList, ImageListItem, ImageListItemBar, Stack, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Navigation from '../Components/Navigation';
@@ -11,8 +11,8 @@ import { getMenuOfDayService, getMenuService } from '../Redux/Services/MenuServi
 
 function Home() {
   const dispatch  = useDispatch();
-  useEffect(()=> getMenuOfDayService(dispatch))
-  useEffect(() => getMenuService(dispatch))
+  const MenuDay = React.useMemo (() =>getMenuOfDayService(dispatch), [dispatch])
+  const Menu = React.useMemo (() =>getMenuService(dispatch), [dispatch])
 
 
 
@@ -20,7 +20,6 @@ function Home() {
   const MenuOfDayState = useSelector(state => state.menuofday);
   const menus = MenuState.menu
   const menusOfDay = MenuOfDayState.menu
-  console.log(menusOfDay);
   
 const URL= "http://localhost:8000/images/dishes/";
 

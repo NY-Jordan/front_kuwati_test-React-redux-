@@ -5,7 +5,7 @@ import { getMenuFailed, getMenuOfDayFailed, getMenuOfDaySucess, getMenuSuccess }
 
 
 
-export const getMenuService = (dispatch) => {
+export const getMenuService = async (dispatch) => {
     const getMenuRequest =  setTimeout(() => {
         Apiclient().get('/dishes?page=1',  {})
             .then((response) => {
@@ -26,7 +26,7 @@ export const getMenuService = (dispatch) => {
     
 };
 
-export const getMenuOfDayService = (dispatch) => {
+export const getMenuOfDayService  = async (dispatch) =>   {
     const getMenuRequest =  setTimeout(() => {
         const date = moment().format('DD-MM-YYYY');
         console.log(date);
