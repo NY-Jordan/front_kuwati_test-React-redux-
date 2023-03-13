@@ -24,12 +24,12 @@ function Home() {
 const URL= "http://localhost:8000/images/dishes/";
 
   return (
-      <>
+      <Box sx={{ marginLeft: "20px", marginRight: "20px" }}>
         <Box>
           <Navigation />
         </Box>
-        <Container>
-          <Box>
+        
+          <Box sx={{ marginTop : "20px" }}>
             <Typography variant='h5'>Les Menus du jour</Typography>
             <ImageList
               sx={{
@@ -54,7 +54,10 @@ const URL= "http://localhost:8000/images/dishes/";
                 <Typography variant='h5'>Nos différents Plats</Typography> 
               </Box>
               <Stack>
-                <Grid container >
+                <Grid container 
+                alignItems="center"
+                justifyContent="center"
+                >
                   {menus ? menus.map((menu, key) =>  <MenuReviewCard 
                     key={key}
                     title={menu.name}
@@ -67,8 +70,7 @@ const URL= "http://localhost:8000/images/dishes/";
               </Stack>
           </Box>
           
-        </Container>
-      </>
+      </Box>
    );
 }
 

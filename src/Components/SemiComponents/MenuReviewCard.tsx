@@ -20,16 +20,20 @@ type props = {
 }
 
 
+
+
 const URL_IMAGE = "http://localhost:8000/images/dishes/";
 
 
 const MenuReviewCard : React.FC<props> = ({title, description, image, price }) =>  {
 
 
+  const subs_description = description.substring(0,250);
   const [open, setOpen] = React.useState(false);
   const handleclose =() => {
     setOpen(false)
   }
+  
   const ChildDialog = () => {
     return(
       <DialogActions>
@@ -60,8 +64,9 @@ const MenuReviewCard : React.FC<props> = ({title, description, image, price }) =
           alt="Paella dish"
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {description.substr(1, 200)} {description.length > 200 ? <Button variant="text" >...View More</Button> : ""}
+          <Typography variant="body2" color="text.secondary" dangerouslySetInnerHTML={{ __html : subs_description }} />
+          <Typography >
+            {description.length > 200 ? <Button variant='text'>...View More</Button> : ""}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
