@@ -16,6 +16,7 @@ function  Navigation() {
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Kutiwa-Restaurant
+                
             </Typography>
             {isMobile ? (
           <DrawerComponent />
