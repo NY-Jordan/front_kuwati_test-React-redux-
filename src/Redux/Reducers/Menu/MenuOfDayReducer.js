@@ -15,7 +15,7 @@ const  MenuOfDayReducer = (state = initialState, action) => {
         case MenuActions.GET_MENU_OF_DAY_ACTION:
             return {name : "menu du jour ", menu : action.payload.menus, error: false, } 
         case MenuActions.MENU_GET_ACTION_FAILED: 
-            return {...state, error: action.payload.error } 
+            return {name : "menu du jour ", menu : null, error: true, } 
         default:
             return {...state};
     }

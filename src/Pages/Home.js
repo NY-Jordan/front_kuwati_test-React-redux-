@@ -1,76 +1,134 @@
-import { LocalDining } from '@mui/icons-material';
-import { Box,  Container, Grid, ImageList, ImageListItem, ImageListItemBar, Stack, Typography } from '@mui/material';
-import React, { useEffect, useMemo } from 'react';
+import { Box,  Button,  Container, DialogActions, Divider, Grid, Stack, TextField, Typography } from '@mui/material';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Error400 from '../Components/Errors/Error400';
 import Navigation from '../Components/Navigation';
+import CardCommandDishes from '../Components/SemiComponents/CardCommandDishes';
+import DialogCommand from '../Components/SemiComponents/DialogCommand';
 import LoaderReviewCard from '../Components/SemiComponents/LoaderReviewCard';
-import MenuReviewCard from '../Components/SemiComponents/MenuReviewCard';
+import ReviewCardNew from '../Components/SemiComponents/ReviewCardNew';
 import { getMenuOfDayService, getMenuService } from '../Redux/Services/MenuService';
 
 
 function Home() {
   const dispatch  = useDispatch();
+  const [open, setOpen] = React.useState(false);
   const MenuDay = React.useMemo (() =>getMenuOfDayService(dispatch), [dispatch])
   const Menu = React.useMemo (() =>getMenuService(dispatch), [dispatch])
-
-
-
   const MenuState = useSelector(state => state.menu);
-  const MenuOfDayState = useSelector(state => state.menuofday);
-  const menus = MenuState.menu
-  const menusOfDay = MenuOfDayState.menu
-  
-const URL= "http://localhost:8000/images/dishes/";
-
+  const MenuDaysState = useSelector(state => state.menuofday);
+  const URL= process.env.BASE_IMAGE_URL_DISHES_API;
+  const commandState = useSelector(state => state.command);
+  const command = commandState.command;
+  const ChildDialog = () => {
+    return(
+      <DialogActions>
+        <Button onClick={() => setOpen(false)}>Annulé</Button>
+        <Button onClick={() => setOpen(false)}>Payer</Button>
+      </DialogActions>
+    );
+  }
   return (
-      <Box sx={{ marginLeft: "20px", marginRight: "20px" }}>
-        <Box>
-          <Navigation />
-        </Box>
-        
-          <Box sx={{ marginTop : "20px" }}>
-            <Typography variant='h5'>Les Menus du jour</Typography>
-            <ImageList
-              sx={{
-                gridAutoFlow: "column",
-                gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr)) !important",
-                gridAutoColumns: "minmax(300px, 1fr)"
-              }}
-            >
-              {menusOfDay ? menusOfDay.map((item) => (
-                <Link href="#">
-                  <ImageListItem>
-                  <img alt="food card" src={URL + item.image}  style={{ with : "100px", height : "150px"}} />
-                  <ImageListItemBar title={item.name} />
-                </ImageListItem>
-                </Link>
-              )) : <LocalDining />}
-            </ImageList>
-
-          </Box>
-          <Box marginTop="20px">
-              <Box>
-                <Typography variant='h5'>Nos différents Plats</Typography> 
-              </Box>
-              <Stack>
-                <Grid container 
-                alignItems="center"
-                justifyContent="center"
-                >
-                  {menus ? menus.map((menu, key) =>  <MenuReviewCard 
-                    key={key}
-                    title={menu.name}
-                    description={menu.description}
-                    image={menu.image}
-                    price={menu.price}
-
-                  /> ) : <LoaderReviewCard /> }
-                </Grid>
-              </Stack>
-          </Box>
-          
+      <>
+      <Box>
+        <Navigation />
       </Box>
+      <Divider />
+      <Box sx={{  marginRight: "10px" }}>
+        
+        {
+          MenuState.error ?
+          <>
+          <Error400 />
+          </>
+          : 
+         <>
+          <Grid container direction={"row"}>
+              <Grid item xs={9}  md={9} sx={{ backgroundColor : "#f1f1f1" }}>
+                <Box marginTop="20px">
+                  <Box marginBottom={"50px"}>
+                    <Typography variant='h5' align={"center"} sx={{ fontWeight : "bold", marginBottom : "30px" }}>Passez vos commandes facilement...</Typography> 
+                    <Container>
+                      <Grid  container sx={{  marginRight: "50px", marginLeft: "50px" }}>
+                        <Grid item md={6} xs={6}>
+                          <Typography paragraph>Mots-Clés : </Typography>
+                          <Box>
+                            <Button variant="outlined" sx={{ marginRight : "5px" }}  size="small">Plats du jours</Button>
+                            <Button variant="outlined" sx={{ marginRight : "5px" }}  size="small">Entrer</Button>
+                            <Button variant="outlined" sx={{ marginRight : "5px" }}   size="small">Desert</Button>
+                            <Button variant="outlined" sx={{ marginRight : "5px" }}   size="small">Resistance</Button>
+                          </Box>
+
+                        </Grid>
+                        <Grid item md={6} xs={6}>
+                          <Typography paragraph>Recherche</Typography>
+                          <Box>
+                            <TextField variant="outlined" aria-label="Search" size="small"  />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Container>
+                  </Box>
+                  <Container sx={{  marginRight: "50px", marginLeft: "50px" }}>
+                  <Stack>
+                    <Grid container 
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      {MenuState.menu ? MenuState.menu.map((menu, key) =>  <ReviewCardNew 
+                      key={key}
+                      title={menu.name}
+                      description={menu.description}
+                      image={menu.image}
+                      price={menu.price}
+
+                       /> ) : <LoaderReviewCard /> }
+                  
+                    </Grid>
+                 </Stack>
+                  </Container>
+                </Box>
+              </Grid>
+             
+              <Grid item  xs={3} md={3} sx={{ backgroundColor : "white", padding : "5px", overflowX: 'scroll',overflowY: 'hidden' }} >
+                <Box>
+                  <Typography paragraph sx={{ fontSize : "30px", fontWeight : "bold" }}>Ma commande</Typography>
+                </Box>
+                <Stack direction="row" >
+                  <Stack direction="row" sx={{ backgroundColor : "#cf1f2a", borderRadius : "100px", padding : "2px", color: "white", width : "40%" }}>
+                    <Box>Plats</Box>
+                    <Box >{command.lenght}</Box>
+                  </Stack>
+                  <Stack direction="row" sx={{ backgroundColor : "#cf1f2a", borderRadius : "100px", padding : "2px", color: "white", width : "40%" }}>
+                    <Box>Boisson</Box>
+                    <Box>00</Box>
+                  </Stack>
+                </Stack>
+                <Box marginBottom={"50px"}>
+                  {command ? 
+                    command.map((dishes, key) => <CardCommandDishes 
+                      title={dishes.title} 
+                      price={dishes.price} 
+                      image={dishes.image} 
+                      part={dishes.part}  />)
+                  : <Typography align={"center"}>Votre commande est vide...</Typography>}
+                </Box>
+                <Box sx={{ fontSize : "20px", marginBottom : "5px" }}>
+                  Total : {commandState.totalPrice} Fcfa
+                </Box>
+                <Button variant="contained" onClick={() => setOpen(true)} color="warning" fullWidth >
+                   Valider la commande
+                </Button>
+                <DialogCommand open={open}  >
+                  <ChildDialog />
+                </DialogCommand>
+              </Grid>
+            </Grid>
+         </>
+       }
+
+      </Box>
+      </>
    );
 }
 

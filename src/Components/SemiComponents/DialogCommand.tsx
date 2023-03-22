@@ -1,22 +1,17 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
+import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl, FormControlLabel, FormLabel,Box, Grid, Radio, RadioGroup, Typography, TextField, InputAdornment, CircularProgress } from '@mui/material';
-import { AccountCircle, PhoneAndroid } from '@mui/icons-material';
+import { FormControl, FormControlLabel, FormLabel,Box, Grid, Radio, RadioGroup, Typography, CircularProgress } from '@mui/material';
 import AddField from './AddField';
 
 
 type Props = {
   open: boolean,
-  title : string,
-  price: number,
   children : React.ReactElement
 };
- const DialogCommand : React.FC<Props> = ({open,title,price, children}) => {
+ const DialogCommand : React.FC<Props> = ({open, children}) => {
 
   const [value, setValue] = React.useState() 
   const [loader, setLoader] = React.useState(false) 
@@ -71,16 +66,7 @@ type Props = {
       >
         <DialogTitle id="scroll-dialog-title">Valider la commande</DialogTitle>
         <DialogContent >
-        <Box sx={{ margin : "20px" }}>
-            <Grid container xs={12}>
-                <Grid item xs={6}>
-                    <Typography variant="h5"><strong>Plat</strong> : {title} </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                    <Typography variant="h5"><strong>Prix</strong> : {price} Fcfa</Typography>
-                </Grid>
-            </Grid>
-        </Box>
+        
         <Box>
             <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label">Type de Commande</FormLabel>

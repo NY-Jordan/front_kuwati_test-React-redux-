@@ -25,7 +25,7 @@ export const getMenuOfDaySucess = (menus) => ({
     payload : {menus : menus}
 })
 
-export const getMenuOfDayFailed = (menus) => ({
+export const getMenuOfDayFailed = (error) => ({
     type : MenuActions.GET_MENU_OF_DAY_ACTION,
-    payload : {menus : menus}
+    payload : {error : error}
 })

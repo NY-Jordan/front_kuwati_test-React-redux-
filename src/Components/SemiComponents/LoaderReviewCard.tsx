@@ -19,6 +19,18 @@ export default function LoaderReviewCard() {
             <Grid item >
                 <SkelletonCard />
             </Grid>
+            <Grid item >
+                <SkelletonCard />
+            </Grid>
+            <Grid item >
+                <SkelletonCard />
+            </Grid>
+            <Grid item >
+                <SkelletonCard />
+            </Grid>
+            <Grid item >
+                <SkelletonCard />
+            </Grid>
         </>
 
     );

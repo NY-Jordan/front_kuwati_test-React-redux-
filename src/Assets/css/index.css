@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.cardMenu:hover {
+    transform: scale(1.02);
+    box-shadow: 10px 5px 5px rgb(163, 152, 152)
+ }
+
+.btnOrder {
+    border-radius : "30px"; 
+    padding : "10px";
+    font-weight : "bold"; 
+ }
+.nav-btn, .btn-order {
+    text-transform: capitalize;
+ }
+

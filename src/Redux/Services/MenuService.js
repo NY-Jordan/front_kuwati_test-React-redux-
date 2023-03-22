@@ -10,7 +10,6 @@ export const getMenuService = async (dispatch) => {
         Apiclient().get('/dishes?page=1',  {})
             .then((response) => {
             const res = response.data;
-                console.log(res);
                 if (response.status === 200) {
                     const menu = res['hydra:member'];
                     dispatch(getMenuSuccess(menu))
@@ -18,7 +17,7 @@ export const getMenuService = async (dispatch) => {
                     dispatch(getMenuFailed(res.error))
                 }    
             }).catch((e) => { 
-                dispatch(getMenuFailed(e.response.data.message))
+                dispatch(getMenuFailed(e.message))
             })
       }, 2000);
       
@@ -29,19 +28,20 @@ export const getMenuService = async (dispatch) => {
 export const getMenuOfDayService  = async (dispatch) =>   {
     const getMenuRequest =  setTimeout(() => {
         const date = moment().format('DD-MM-YYYY');
-        console.log(date);
         Apiclient().get('/dishes?page=1&created_at%5Bafter%5D='+date,  {})
             .then((response) => {
             const res = response.data;
-                console.log(res);
+            console.log(response.status);
                 if (response.status === 200) {
                     const menu = res['hydra:member'];
                     dispatch(getMenuOfDaySucess(menu))
                 } else {
-                    dispatch(getMenuOfDayFailed(res.error))
+                    dispatch(getMenuOfDayFailed(res.message))
                 }    
             }).catch((e) => { 
-                dispatch(getMenuOfDayFailed(e.response.data.message))
+                if (e.message) {
+                    dispatch(getMenuOfDayFailed(e.message))                    
+                }
             })
       }, 1000);
       
