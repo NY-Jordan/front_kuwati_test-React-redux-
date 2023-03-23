@@ -1,17 +1,23 @@
-import { Delete, TramSharp } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { removeDishesToCommandAction } from '../../Redux/Actions/CommandActions';
 
 type props = {
     title : string,
     image : string,
     price : number,
     part : number,
+    id : number,
 }
 
-const CardCommandDishes : React.FC<props> = ({title, image, price , part}) => {
+const CardCommandDishes : React.FC<props> = ({title, image, price , part, id}) => {
     const URL_IMAGE = process.env.REACT_APP_IMAGE_URL_DISHES_API;
+    const dispacth = useDispatch()
+    const remove = () => {
+        dispacth(removeDishesToCommandAction(id, price));
+    }
     return (
       <Box sx={{ marginBottom : "25px", marginTop : "25px" }}>
         <Grid container direction={"row"}>
@@ -26,7 +32,7 @@ const CardCommandDishes : React.FC<props> = ({title, image, price , part}) => {
                 <Typography></Typography>
             </Grid>
             <Grid item md={2}>
-                <Button>
+                <Button onClick={()=> remove()}>
                     <Delete></Delete>
                 </Button>
             </Grid>

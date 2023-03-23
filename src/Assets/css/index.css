@@ -18,3 +18,8 @@
     text-transform: capitalize;
  }
 
+ .navbar{
+    background-image: linear-gradient(to right, white , #cf1f2a);
+ }
+
+

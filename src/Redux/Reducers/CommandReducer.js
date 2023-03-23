@@ -17,7 +17,12 @@ const  CommandReducer = (state = initialState, action) => {
         case CommandActions.ADD_DIHES_TO_COMMAND_ACTION :
             return {name : "command", command : [...state.command,  action.payload.dishes] , error: false, totalPrice : state.totalPrice + action.payload.dishes.price } 
     case CommandActions.REMOVE_DIHES_TO_COMMAND_ACTION :
-        return {name : "command", command : [...state.command,  action.payload.dishes] , error: false } 
+        if (state.command.length > 1) {
+           const newState = state.command.filter((dishes) => dishes.id === action.payload.id)
+           return {name : "command", command : newState , error: false , totalPrice : state.totalPrice - action.payload.price} 
+        } else { 
+            return {name : "command", command : [] , error: false , totalPrice : state.totalPrice - action.payload.price} 
+        }
     default:
     return {...state};
     }

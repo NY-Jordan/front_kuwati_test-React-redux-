@@ -12,7 +12,7 @@ export const addDishesToCommandAction = (dishes) => ({
         payload : {dishes : dishes}
 });
 
-export const removeDishesToCommandAction = (dishes) => ({
-    type : CommandActions.ADD_DIHES_TO_COMMAND_ACTION,
-    payload : {dishes : dishes}
+export const removeDishesToCommandAction = (id, price) => ({
+    type : CommandActions.REMOVE_DIHES_TO_COMMAND_ACTION,
+    payload : {id : id, price: price}
 });

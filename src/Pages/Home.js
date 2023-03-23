@@ -1,4 +1,5 @@
-import { Box,  Button,  Container, DialogActions, Divider, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Search } from '@mui/icons-material';
+import { Box,  Button,  Container, DialogActions, Divider, Grid, Input, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Error400 from '../Components/Errors/Error400';
@@ -23,8 +24,8 @@ function Home() {
   const ChildDialog = () => {
     return(
       <DialogActions>
-        <Button onClick={() => setOpen(false)}>Annulé</Button>
-        <Button onClick={() => setOpen(false)}>Payer</Button>
+        <Button onClick={() => setOpen(false)}>Annuler</Button>
+        <Button onClick={() => setOpen(false)}>Continuer</Button>
       </DialogActions>
     );
   }
@@ -34,7 +35,7 @@ function Home() {
         <Navigation />
       </Box>
       <Divider />
-      <Box sx={{  marginRight: "10px" }}>
+      <Box sx={{  marginRight: "10px",  marginTop: "60px" }}>
         
         {
           MenuState.error ?
@@ -43,13 +44,13 @@ function Home() {
           </>
           : 
          <>
-          <Grid container direction={"row"}>
+          <Grid container direction={"row"} >
               <Grid item xs={9}  md={9} sx={{ backgroundColor : "#f1f1f1" }}>
                 <Box marginTop="20px">
                   <Box marginBottom={"50px"}>
                     <Typography variant='h5' align={"center"} sx={{ fontWeight : "bold", marginBottom : "30px" }}>Passez vos commandes facilement...</Typography> 
                     <Container>
-                      <Grid  container sx={{  marginRight: "50px", marginLeft: "50px" }}>
+                      <Grid  container sx={{  marginRight: "50px", marginLeft: "50px" }} spacing={8}>
                         <Grid item md={6} xs={6}>
                           <Typography paragraph>Mots-Clés : </Typography>
                           <Box>
@@ -63,7 +64,14 @@ function Home() {
                         <Grid item md={6} xs={6}>
                           <Typography paragraph>Recherche</Typography>
                           <Box>
-                            <TextField variant="outlined" aria-label="Search" size="small"  />
+                          <Input
+                            id="input-with-icon-adornment"
+                            startAdornment={
+                            <InputAdornment position="start">
+                              <Search />
+                            </InputAdornment>
+                             }
+                           />
                           </Box>
                         </Grid>
                       </Grid>
@@ -81,7 +89,7 @@ function Home() {
                       description={menu.description}
                       image={menu.image}
                       price={menu.price}
-
+                      id={menu["@id"]}
                        /> ) : <LoaderReviewCard /> }
                   
                     </Grid>
@@ -90,14 +98,15 @@ function Home() {
                 </Box>
               </Grid>
              
-              <Grid item  xs={3} md={3} sx={{ backgroundColor : "white", padding : "5px", overflowX: 'scroll',overflowY: 'hidden' }} >
+              <Grid item  xs={3} md={3} sx={{ backgroundColor : "white", padding : "5px" }} >
+                <Box sx={{ position : "fixed", overflowY : "scroll", overflowX : "hidden",  top: "4em", bottom:2, width : "25%" }}>
                 <Box>
                   <Typography paragraph sx={{ fontSize : "30px", fontWeight : "bold" }}>Ma commande</Typography>
                 </Box>
-                <Stack direction="row" >
-                  <Stack direction="row" sx={{ backgroundColor : "#cf1f2a", borderRadius : "100px", padding : "2px", color: "white", width : "40%" }}>
-                    <Box>Plats</Box>
-                    <Box >{command.lenght}</Box>
+                <Stack direction="row" spacing={8} >
+                  <Stack direction="row" sx={{ backgroundColor : "#cf1f2a", borderRadius : "100px", padding : "2px", color: "white", width : "40%", borderStyle: "ridge"}}>
+                    <Box sx={{  }}>Plats</Box>
+                    <Box >{command.length}</Box>
                   </Stack>
                   <Stack direction="row" sx={{ backgroundColor : "#cf1f2a", borderRadius : "100px", padding : "2px", color: "white", width : "40%" }}>
                     <Box>Boisson</Box>
@@ -105,23 +114,26 @@ function Home() {
                   </Stack>
                 </Stack>
                 <Box marginBottom={"50px"}>
-                  {command ? 
+                  {command.length > 0 ? 
                     command.map((dishes, key) => <CardCommandDishes 
                       title={dishes.title} 
                       price={dishes.price} 
                       image={dishes.image} 
-                      part={dishes.part}  />)
-                  : <Typography align={"center"}>Votre commande est vide...</Typography>}
+                      part={dishes.part}
+                      id = {dishes.id}
+                        />)
+                  : <Typography  marginTop={"30px"} align={"center"}>Votre commande est vide...</Typography>}
                 </Box>
                 <Box sx={{ fontSize : "20px", marginBottom : "5px" }}>
                   Total : {commandState.totalPrice} Fcfa
                 </Box>
-                <Button variant="contained" onClick={() => setOpen(true)} color="warning" fullWidth >
+                <Button variant="contained" disabled={command.length <= 0} onClick={() => setOpen(true)} color="warning" fullWidth >
                    Valider la commande
                 </Button>
                 <DialogCommand open={open}  >
                   <ChildDialog />
                 </DialogCommand>
+                </Box>
               </Grid>
             </Grid>
          </>

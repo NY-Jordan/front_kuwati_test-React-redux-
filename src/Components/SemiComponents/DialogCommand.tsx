@@ -64,7 +64,7 @@ type Props = {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">Valider la commande</DialogTitle>
+        <DialogTitle>Valider la commande</DialogTitle>
         <DialogContent >
         
         <Box>
@@ -75,7 +75,7 @@ type Props = {
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                 >
-                    <FormControlLabel value="emporter" sx={{ marginRight : "300px" }} control={<Radio />} label="A emporter" />
+                    <FormControlLabel value="emporter" sx={{ marginRight : "100px" }} control={<Radio />} label="A emporter" />
                         
                     <FormControlLabel value="sur place" control={<Radio />} label="Deguster sur place" />
                 </RadioGroup>
@@ -91,7 +91,7 @@ type Props = {
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                 >
-                    <FormControlLabel value="personne" sx={{ marginRight : "300px" }} control={<Radio />} label="une Personne" />
+                    <FormControlLabel value="personne" sx={{ marginRight : "100px" }} control={<Radio />} label="une Personne" />
                         
                     <FormControlLabel value="groupe" control={<Radio />} label="en Groupe" />
                 </RadioGroup>

@@ -18,15 +18,17 @@ type props = {
   description : string,
   image : string,
   created_at : Date,
-  price : number
+  price : number, 
+  id : string
   
 }
 
 
 const URL_IMAGE = process.env.REACT_APP_IMAGE_URL_DISHES_API;
-const ReviewCardNew : React.FC<props> = ({title, description, image, price }) =>  {
+const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }) =>  {
 
   const [part, setPart] = React.useState(1);
+  const [Initial, setInitial] = React.useState(0)
   const [finalPrice, setFinalPrice] = React.useState(price);
   const dispatch = useDispatch()
   const addPart = () => {
@@ -39,9 +41,12 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price }) =>
         setFinalPrice(finalPrice-price);
     }
   }
+  
+  
 
   const AddDishes = () => {
     const dishes = {
+      id : id,
       title : title,
       image : image ,
       price : finalPrice,
@@ -64,7 +69,7 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price }) =>
         </Typography>
         <Box>
            <Grid container direction={"row"} justifyContent={"center"} alignItems={"center"}>
-            <Button variant="outlined"  sx={{ borderColor : "#cf1f2a", color : "#cf1f2a"}} size="small" onClick={() => removePart()}   >
+            <Button variant="outlined"  sx={{ borderColor : "#cf1f2a", color : "#cf1f2a"}} size="small" onClick={() => AddDishes()}   >
               <Remove />
             </Button>
              <Typography variant="h3"  sx={{ marginLeft : "10px",  marginRight : "10px", fontWeight : "bold" }} >{part}</Typography>
