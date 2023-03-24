@@ -31,7 +31,6 @@ export const getMenuOfDayService  = async (dispatch) =>   {
         Apiclient().get('/dishes?page=1&created_at%5Bafter%5D='+date,  {})
             .then((response) => {
             const res = response.data;
-            console.log(response.status);
                 if (response.status === 200) {
                     const menu = res['hydra:member'];
                     dispatch(getMenuOfDaySucess(menu))

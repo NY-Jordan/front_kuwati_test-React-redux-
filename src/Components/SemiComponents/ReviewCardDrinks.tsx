@@ -10,7 +10,7 @@ import { red } from '@mui/material/colors';
 import { Box, Button, DialogActions, DialogProps, Grid, Menu, MenuItem } from '@mui/material';
 import DialogCommand from './DialogCommand';
 import { Add, Remove } from '@mui/icons-material';
-import {  AddDishesToCommandService } from '../../Redux/Services/CommandServices';
+import {  AddDishesToCommandService, AddDrinksToCommandService } from '../../Redux/Services/CommandServices';
 import { useDispatch } from 'react-redux';
 
 type props = {
@@ -24,8 +24,8 @@ type props = {
 }
 
 
-const URL_IMAGE = process.env.REACT_APP_IMAGE_URL_DISHES_API;
-const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }) =>  {
+const URL_IMAGE = process.env.REACT_APP_IMAGE_URL_DRINKS_API;
+const ReviewCardDrinks : React.FC<props> = ({title, description, image, price, id }) =>  {
 
   const [part, setPart] = React.useState(1);
   const [Initial, setInitial] = React.useState(0)
@@ -44,7 +44,7 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }
   
   
 
-  const AddDishes = () => {
+  const AddDrinks = () => {
     const dishes = {
       id : id,
       title : title,
@@ -52,11 +52,11 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }
       price : finalPrice,
       part : part
     }
-    AddDishesToCommandService(dispatch, dishes)
+    AddDrinksToCommandService(dispatch, dishes)
   }
   
   return (
-    <Grid item md={4} xs={6} sm={12} marginBottom={"20px"} >
+    <Grid item md={4} xs={4} sm={6} marginBottom={"20px"} >
         <Card sx={{ maxWidth: 250 }} className="cardMenu" >
       <CardMedia
         sx={{ height: 200 }}
@@ -82,11 +82,11 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="large" variant="contained" startIcon={<Add />}  color="warning" onClick={() => AddDishes()}  fullWidth >ADD </Button>
+        <Button size="large" variant="contained" startIcon={<Add />}  color="warning" onClick={() => AddDrinks()}  fullWidth >ADD </Button>
       </CardActions>
     </Card>
     </Grid>
   );
 }
 
-export default ReviewCardNew;
+export default ReviewCardDrinks;

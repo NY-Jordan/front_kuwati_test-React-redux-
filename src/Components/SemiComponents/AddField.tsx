@@ -7,9 +7,9 @@ import * as React from 'react';
 
  return (
     <Box>
-            <FormControl sx={{ display : "flex", marginBottom : '30px'}}>
+            <FormControl sx={{ display : "flex",  flexDirection : "row", justifyContent : "space-between" , marginBottom : '30px'}}>
                 <TextField
-                    sx={{marginBottom : "5px"}}
+                    sx={{ marginBottom : "5px", marginRight : "10px"}}
                     id="input-with-icon-textfield"
                     label="Name"
                     InputProps={{

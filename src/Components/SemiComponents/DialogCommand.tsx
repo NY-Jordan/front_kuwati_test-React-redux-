@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl, FormControlLabel, FormLabel,Box, Grid, Radio, RadioGroup, Typography, CircularProgress } from '@mui/material';
+import { FormControl, FormControlLabel, FormLabel,Box, Grid, Radio, RadioGroup, Typography, CircularProgress, Divider } from '@mui/material';
 import AddField from './AddField';
 
 
@@ -65,6 +65,7 @@ type Props = {
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle>Valider la commande</DialogTitle>
+        <Divider />
         <DialogContent >
         
         <Box>
