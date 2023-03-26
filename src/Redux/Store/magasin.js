@@ -3,6 +3,7 @@ import CommandReducer from '../Reducers/CommandReducer';
 import DrinksReducer from '../Reducers/DrinksReducer';
 import MenuOfDayReducer from '../Reducers/Menu/MenuOfDayReducer';
 import MenuReducer from '../Reducers/Menu/MenuReducer';
+import UserReducer from "../Reducers/UserReducer";
 
 
  const RootReducer = 
@@ -11,6 +12,7 @@ import MenuReducer from '../Reducers/Menu/MenuReducer';
         menuofday : MenuOfDayReducer,
         command : CommandReducer,
         drinks : DrinksReducer,
+        user : UserReducer,
         
     });
 

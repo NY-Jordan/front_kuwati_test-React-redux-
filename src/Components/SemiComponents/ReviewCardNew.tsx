@@ -56,7 +56,7 @@ const ReviewCardNew : React.FC<props> = ({title, description, image, price, id }
   }
   
   return (
-    <Grid item md={4} xs={6} sm={12} marginBottom={"20px"} >
+    <Grid item md={4} xs={12} sm={6} marginBottom={"20px"} >
         <Card sx={{ maxWidth: 250 }} className="cardMenu" >
       <CardMedia
         sx={{ height: 200 }}

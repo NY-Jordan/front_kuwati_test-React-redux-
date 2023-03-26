@@ -32,10 +32,11 @@ function  Navigation() {
                 <DrawerComponent />
                </>
         ) : (
-            <Stack direction="row" spacing={2} >
-                <Button color="inherit"  className="nav-btn" onClick={() => navigate('/')}>Dishes</Button>
-                <Button color="inherit" className="nav-btn" onClick={() => navigate('/drinks')}>Beverage</Button>
-                <Button color="inherit" className="nav-btn">Account</Button>
+            <Stack direction="row" spacing={2} color={"white"}>
+                <Button color="inherit"  className="nav-btn" onClick={() => navigate('/dishes')}>Plats</Button>
+                <Button color="inherit" className="nav-btn" onClick={() => navigate('/drinks')}>Boissons</Button>
+                <Button color="inherit" className="nav-btn" onClick={() => navigate('/drinks')}>Mes commandes</Button>
+                <Button color="inherit" className="nav-btn">Profile</Button>
             </Stack>
         )}
             

@@ -27,7 +27,7 @@ function Dishes() {
   
   return (
      <Layouts>
-              <Grid item xs={9}  md={9} sm={12} sx={{ backgroundColor : "#f1f1f1", overflowX : "hidden" }}>
+              <Grid item xs={12}  md={9} sm={12} sx={{ backgroundColor : "#f1f1f1", overflowX : "hidden" }}>
                 <Box marginTop="20px">
                   <Box marginBottom={"50px"}>
                     <Typography variant='h5' align={"center"} sx={{ fontWeight : "bold", marginBottom : "30px" }}>Passez vos commandes facilement...</Typography> 

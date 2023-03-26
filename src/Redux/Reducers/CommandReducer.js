@@ -24,7 +24,8 @@ const  CommandReducer = (state = initialState, action) => {
     
     case CommandActions.REMOVE_DIHES_TO_COMMAND_ACTION :
         if (state.command.dishes.length > 1) {
-           const newState = state.command.dishes.filter((dishes) => dishes.id === action.payload.id)
+           const newState = state.command.dishes.filter((dishe) => dishe.id === action.payload.id)
+           console.log(newState);
            return {name : "command", command : newState , error: false , totalPrice : state.totalPrice - action.payload.price} 
         } else { 
             return {name : "command", command : [] , error: false , totalPrice : state.totalPrice - action.payload.price} 
